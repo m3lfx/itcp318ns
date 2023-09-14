@@ -37,11 +37,12 @@ class PostController extends Controller
     {
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = $request->slug;
+        $post->slug = $request->title;
         $post->content = $request->content;
         $post->user_id = '1';
         $post->save();
-        return response()->json(['status'=>'post saved', 'code'=>200]);
+        // return response()->json(['status'=>'post saved', 'code'=>200]);
+        return response()->json(["data"=>$post,'status'=>'post saved', 'code'=>200]);
     }
 
     /**
@@ -52,7 +53,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        return response()->json($post);
     }
 
     /**
