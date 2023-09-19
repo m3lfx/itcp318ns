@@ -90,7 +90,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user_id = $user->id;
         $post->save();
-        return response()->json(['status'=>'post saved', 'code'=>201]);
+        return response()->json($post);
     }
     /**
      * Remove the specified resource from storage.
