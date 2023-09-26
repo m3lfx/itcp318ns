@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => 'index']);
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        $posts = Post::with('user')->get();
+      
         return response()->json($posts);
     }
 
