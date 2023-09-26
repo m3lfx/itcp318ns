@@ -7,6 +7,10 @@ use App\Models\Post;
 use App\Models\User;
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $posts = Post::with('user')->get();
         return response()->json($posts);
     }
 
@@ -36,6 +41,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+    //     $user = User::find($request->userId);
+    //     $user->name = $request->user;
+    //     $user->save();
+
         $post = new Post();
         $post->title = $request->title;
         $post->slug = $request->title;
